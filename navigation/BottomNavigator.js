@@ -8,6 +8,7 @@ import {
   EvilIcons,
 } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
+import ExporeNavigation from "./ExporeNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +20,7 @@ function BottomNaviation() {
       }}>
       <Tab.Screen
         name={"Explore"}
-        component={HomeScreen}
+        component={ExporeNavigation}
         options={{
           headerShown: false,
           tabBarIcon: () => <Fontisto name="search" size={25} />,

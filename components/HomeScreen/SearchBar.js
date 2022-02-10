@@ -15,7 +15,6 @@ const SearchBar = ({ placeholder }) => {
         placeholderTextColor="gray"
         value={input}
         onChangeText={(text) => setInput(text)}
-        autoFocus={true}
       />
     </View>
   );

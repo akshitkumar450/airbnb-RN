@@ -8,13 +8,13 @@ import { useNavigation } from "@react-navigation/native";
 const Header = () => {
   const navigation = useNavigation();
   return (
-    <View style={tw`h-1/2`}>
+    <View>
       <ImageBackground
         source={bg}
         resizeMode="cover"
         style={{
           width: "100%",
-          height: "100%",
+          height: 300,
         }}>
         <View
           style={tw` items-center rounded-full bg-white mt-10  w-3/4 mx-auto p-3 `}>
