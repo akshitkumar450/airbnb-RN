@@ -5,7 +5,10 @@ import tw from "tailwind-react-native-classnames";
 
 const CustomMarker = ({ coordinates, price, isSelected, onChangeId }) => {
   return (
-    <Marker coordinate={coordinates} onPress={() => onChangeId()}>
+    <Marker
+      identifier="place"
+      coordinate={coordinates}
+      onPress={() => onChangeId()}>
       {/**custom marker */}
       <View
         style={tw`bg-${isSelected ? "black" : "white"} border-2 rounded-full`}>

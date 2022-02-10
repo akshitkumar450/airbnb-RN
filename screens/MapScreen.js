@@ -31,6 +31,25 @@ const MapScreen = () => {
     if (!selectId || !placeRef) return;
     const index = data.findIndex((place) => place.id === selectId);
     placeRef?.current?.scrollToIndex({ index });
+
+    const selectedPlace = data[index];
+    const region = {
+      latitude: selectedPlace.coordinate.latitude,
+      longitude: selectedPlace.coordinate.longitude,
+      latitudeDelta: 0.8,
+      longitudeDelta: 0.8,
+    };
+    // to come in view
+    mapRef.current.animateToRegion(region);
+    // zoom and fit
+    mapRef.current.fitToSuppliedMarkers(["place"], {
+      edgePadding: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+      },
+    });
     // console.warn("scroll", selectId);
   }, [selectId]);
 
