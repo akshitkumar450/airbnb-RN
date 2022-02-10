@@ -11,7 +11,9 @@ import tw from "tailwind-react-native-classnames";
 import CustomMarker from "../navigation/CustomMarker";
 import { data } from "../components/HomeScreen/feed";
 import PostCarousel from "../components/HomeScreen/PostCarousel";
+import { useNavigation } from "@react-navigation/native";
 const MapScreen = () => {
+  const navigation = useNavigation();
   const [selectId, setSelectId] = useState(null);
   const width = useWindowDimensions().width;
   const mapRef = useRef();
@@ -92,6 +94,7 @@ const MapScreen = () => {
           snapToInterval={width - 60} //gets width of our items
           renderItem={({ item }) => (
             <PostCarousel
+              onPress={() => navigation.navigate("DetailScreen", { item })}
               img={item.image}
               bed={item.bed}
               bedRoom={item.bedRoom}

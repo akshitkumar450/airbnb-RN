@@ -4,6 +4,7 @@ import HomeScreen from "../screens/HomeScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomNaviation from "./BottomNavigator";
+import DetailScreen from "./DetailScreen";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -30,6 +31,13 @@ const Navigation = () => {
             title: "How many people",
           }}
           component={GuestsScreen}
+        />
+        <Stack.Screen
+          name={"DetailScreen"}
+          options={{
+            title: "Detail",
+          }}
+          component={DetailScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

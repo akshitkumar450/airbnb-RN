@@ -4,14 +4,23 @@ import {
   Image,
   StyleSheet,
   useWindowDimensions,
+  Pressable,
 } from "react-native";
 import React from "react";
 import tw from "tailwind-react-native-classnames";
 
-const PostCarousel = ({ img, bed, bedroom, newPrice, description }) => {
+const PostCarousel = ({
+  img,
+  bed,
+  bedroom,
+  newPrice,
+  description,
+  onPress,
+}) => {
   const width = useWindowDimensions().width;
   return (
-    <View
+    <Pressable
+      onPress={() => onPress()}
       style={[
         tw` h-24 mx-2 rounded-lg  overflow-hidden bg-gray-200 flex-row items-center`,
         { width: width - 60 }, // to show next item little
@@ -38,7 +47,7 @@ const PostCarousel = ({ img, bed, bedroom, newPrice, description }) => {
           <Text style={tw`text-black font-bold`}> ${newPrice}</Text> /night
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
