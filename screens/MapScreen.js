@@ -5,7 +5,7 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import tw from "tailwind-react-native-classnames";
 import CustomMarker from "../navigation/CustomMarker";
@@ -14,9 +14,30 @@ import PostCarousel from "../components/HomeScreen/PostCarousel";
 const MapScreen = () => {
   const [selectId, setSelectId] = useState(null);
   const width = useWindowDimensions().width;
+  const mapRef = useRef();
+  const placeRef = useRef();
+
+  //   two way binding between flatlist and map
+  const viewConfigRef = useRef({ itemVisiblePercentThreshold: 70 });
+  const viewItems = useRef(({ viewableItems }) => {
+    // console.log(viewableItems);
+    if (viewableItems.length > 0) {
+      setSelectId(viewableItems[0].item.id);
+    }
+  });
+
+  // for automating scrolling to the place on which we clicked on map and show the effect of selecting that place on map
+  useEffect(() => {
+    if (!selectId || !placeRef) return;
+    const index = data.findIndex((place) => place.id === selectId);
+    placeRef?.current?.scrollToIndex({ index });
+    // console.warn("scroll", selectId);
+  }, [selectId]);
+
   return (
     <View>
       <MapView
+        ref={mapRef}
         style={tw`h-full w-full`}
         mapType="mutedStandard"
         initialRegion={{
@@ -38,6 +59,10 @@ const MapScreen = () => {
 
       <View style={[tw`absolute bottom-5 left-0 right-0`]}>
         <FlatList
+          ref={placeRef}
+          viewabilityConfig={viewConfigRef.current} //visiblity >70
+          //   the item which is visible then it should set the particular price on map
+          onViewableItemsChanged={viewItems.current}
           keyExtractor={(item) => item.id}
           data={data}
           showsHorizontalScrollIndicator={false}
