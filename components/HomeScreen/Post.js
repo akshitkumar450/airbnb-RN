@@ -9,7 +9,7 @@ const Post = ({
   oldPrice,
   newPrice,
   description,
-  total,
+  totalPrice,
 }) => {
   return (
     <View style={tw`p-5`}>
@@ -36,7 +36,9 @@ const Post = ({
         <Text style={tw`line-through`}>${oldPrice}</Text>{" "}
         <Text style={tw`text-black font-bold`}> ${newPrice}</Text> /night
       </Text>
-      <Text style={tw`text-lg text-gray-600 underline`}>${total} total</Text>
+      <Text style={tw`text-lg text-gray-600 underline`}>
+        ${totalPrice} total
+      </Text>
     </View>
   );
 };

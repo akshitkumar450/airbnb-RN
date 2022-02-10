@@ -19,7 +19,7 @@ const SearchResults = () => {
             description={item.title}
             oldPrice={item.oldPrice}
             newPrice={item.newPrice}
-            total={item.total}
+            total={item.totalPrice}
           />
         )}
       />

@@ -39,7 +39,7 @@ const GuestsScreen = () => {
           navigation.navigate("HomeTab", {
             screen: "Explore",
             params: {
-              screen: "SearchResults",
+              screen: "SearchResultsNavigation",
             },
           });
         }}>
