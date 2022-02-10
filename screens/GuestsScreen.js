@@ -36,6 +36,8 @@ const GuestsScreen = () => {
       <Pressable
         onPress={() => {
           // navigation.navigate("SearchResults");
+          // nesting navigation
+          // HomeTab->Explore->SearchResultsNavigation
           navigation.navigate("HomeTab", {
             screen: "Explore",
             params: {
