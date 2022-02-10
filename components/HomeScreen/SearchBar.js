@@ -7,7 +7,7 @@ const SearchBar = ({ placeholder }) => {
   const [input, setInput] = useState("");
   return (
     <View
-      style={tw`border-2 bg-white flex-row justify-center items-center mx-auto w-4/5 rounded-full p-2 mt-10 h-14`}>
+      style={tw`border-2 -mt-10 bg-white flex-row justify-center items-center mx-auto w-4/5 rounded-full p-2 mt-10 h-14`}>
       <FontAwesome5 name="search" size={20} style={tw`text-red-500 mr-2`} />
       <TextInput
         style={tw`text-xl`}

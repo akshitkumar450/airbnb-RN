@@ -9,29 +9,49 @@ import React from "react";
 import tw from "tailwind-react-native-classnames";
 import SearchBar from "../components/HomeScreen/SearchBar";
 import { search } from "../components/HomeScreen/search";
-import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import SearchRow from "../components/HomeScreen/SearchRow";
 
 const DestinationSearch = () => {
   const navigation = useNavigation();
   return (
     <View>
-      <SearchBar placeholder="where are you going?" />
+      {/***
+       * 
+       <SearchBar placeholder="where are you going?" />
+       */}
+      <GooglePlacesAutocomplete
+        placeholder="where are you going?"
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails = true
+          console.log(data, details);
+          navigation.navigate("GuestsScreen");
+        }}
+        // to geometry location,lng,lat
+        fetchDetails={true}
+        query={{
+          key: "YOUR API KEY",
+          language: "en",
+          types: "(cities)", //to show only cities
+        }}
+        styles={{
+          container: {
+            flex: 0,
+          },
+          textInput: {
+            color: "#5d5d5d",
+            fontSize: 16,
+          },
+        }}
+        // to disable default styles
+        // suppressDefaultStyles
+        // for our custom list of results
+        renderRow={(item) => <SearchBar item={item} />}
+      />
       <FlatList
         data={search}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigation.navigate("GuestsScreen")}>
-            <View
-              style={tw`flex-row border-2 border-gray-100 px-2 items-center  my-1`}>
-              <View style={tw`bg-gray-100 rounded-md p-2`}>
-                <Entypo name="location-pin" size={25} />
-              </View>
-              <View>
-                <Text style={tw`ml-2`}>{item.description}</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        )}
+        renderItem={({ item }) => <SearchRow item={item} />}
       />
     </View>
   );
