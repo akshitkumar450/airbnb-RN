@@ -1,11 +1,19 @@
-import { StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import tw from "tailwind-react-native-classnames";
 import CustomMarker from "../navigation/CustomMarker";
 import { data } from "../components/HomeScreen/feed";
+import PostCarousel from "../components/HomeScreen/PostCarousel";
 const MapScreen = () => {
   const [selectId, setSelectId] = useState(null);
+  const width = useWindowDimensions().width;
   return (
     <View>
       <MapView
@@ -27,6 +35,30 @@ const MapScreen = () => {
           />
         ))}
       </MapView>
+
+      <View style={[tw`absolute bottom-5 left-0 right-0`]}>
+        <FlatList
+          keyExtractor={(item) => item.id}
+          data={data}
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          //   for auto snap
+          snapToAlignment="center"
+          decelerationRate="fast"
+          snapToInterval={width - 60} //gets width of our items
+          renderItem={({ item }) => (
+            <PostCarousel
+              img={item.image}
+              bed={item.bed}
+              bedRoom={item.bedRoom}
+              description={item.title}
+              oldPrice={item.oldPrice}
+              newPrice={item.newPrice}
+              total={item.totalPrice}
+            />
+          )}
+        />
+      </View>
     </View>
   );
 };
